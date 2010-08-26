@@ -13,11 +13,13 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	texlive-latex-appendix
 BuildRequires:	texlive-latex-effects
 BuildRequires:	texlive-latex-extend
+BuildRequires:	texlive-latex-wasysym
 BuildRequires:	transfig
 Requires:	python-modules
 Requires:	texlive-latex-appendix
 Requires:	texlive-latex-effects
 Requires:	texlive-latex-extend
+Requires:	texlive-latex-wasysym
 Requires:	transfig
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
