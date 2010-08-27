@@ -1,7 +1,7 @@
 Summary:	Convert DocBook to LaTeX, DVI, PostScript, and PDF
 Name:		dblatex
 Version:	0.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Publishing
 Source0:	http://dl.sourceforge.net/dblatex/%{name}-%{version}.tar.bz2
