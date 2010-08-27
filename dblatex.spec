@@ -10,6 +10,7 @@ URL:		http://dblatex.sourceforge.net/
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	texlive-latex-ams
 BuildRequires:	texlive-latex-appendix
 BuildRequires:	texlive-latex-effects
 BuildRequires:	texlive-latex-extend
