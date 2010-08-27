@@ -17,6 +17,7 @@ BuildRequires:	texlive-latex-extend
 BuildRequires:	texlive-latex-wasysym
 BuildRequires:	transfig
 Requires:	python-modules
+Requires:	texlive-latex-ams
 Requires:	texlive-latex-appendix
 Requires:	texlive-latex-effects
 Requires:	texlive-latex-extend
