@@ -1,11 +1,13 @@
 Summary:	Convert DocBook to LaTeX, DVI, PostScript, and PDF
+Summary(pl.UTF-8):	Przekształcanie DocBooka do LaTeXa, DVI, PostScriptu i PDF
 Name:		dblatex
-Version:	0.3
-Release:	2
-License:	GPL
+Version:	0.3.4
+Release:	1
+License:	GPL v2+
 Group:		Applications/Publishing
-Source0:	http://dl.sourceforge.net/dblatex/%{name}-%{version}.tar.bz2
-# Source0-md5:	7de6bf72b8b2934169ce0ec911e966ed
+Source0:	http://downloads.sourceforge.net/dblatex/%{name}-%{version}.tar.bz2
+# Source0-md5:	a511a2eaa55757b341e4c46353c5c681
+Patch0:		%{name}-nodebian.patch
 URL:		http://dblatex.sourceforge.net/
 BuildRequires:	python-distribute
 BuildRequires:	rpm-pythonprov
@@ -29,10 +31,17 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 dblatex is a program that transforms your SGML/XML DocBook documents
 to DVI, PostScript or PDF by translating them into pure LaTeX
-as a first process.  MathML 2.0 markups are supported, too.
+as a first process. MathML 2.0 markups are supported, too.
+
+%description -l pl.UTF-8
+dblatex to program przekształcający dokumenty w formacie SGML/XML
+DocBook do formatów DVI, PostScript lub PDF poprzez tłumaczenie ich
+najpierw do czystego LaTeXa. Obsługiwane są także znaczniki MathML
+2.0.
 
 %prep
 %setup -q
+%patch0 -p1
 
 # fix #!/usr/bin/env python -> #!/usr/bin/python:
 %{__sed} -i -e '1s,^#!.*python,#!%{__python},' scripts/%{name}
@@ -51,14 +60,14 @@ rm -rf $RPM_BUILD_ROOT
 %py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}
 %py_postclean
 
-rm -r $RPM_BUILD_ROOT%{_datadir}/doc
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc docs/*
+%doc COPYRIGHT docs/{manual,release-notes}.pdf
 %attr(755,root,root) %{_bindir}/dblatex
 %dir %{py_sitescriptdir}/dbtexmf
 %{py_sitescriptdir}/dbtexmf/*.py[co]
@@ -75,4 +84,4 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/dbtexmf/xslt/*.py[co]
 %{py_sitescriptdir}/dblatex-*.egg-info
 %{_datadir}/%{name}
-%{_mandir}/man1/*.1*
+%{_mandir}/man1/dblatex.1*

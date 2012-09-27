@@ -1,0 +1,40 @@
+--- dblatex-0.3.4/setup.py.orig	2012-06-03 01:43:42.000000000 +0200
++++ dblatex-0.3.4/setup.py	2012-09-27 18:26:56.603121631 +0200
+@@ -23,7 +23,6 @@
+ from distutils import log
+ from subprocess import Popen, PIPE
+ sys.path.append("lib")
+-from contrib.debian.installer import DebianInstaller
+ 
+ #
+ # Build the command line script
+@@ -365,12 +364,8 @@
+             raise OSError("not found: %s" % ", ".join(mis_stys))
+ 
+     def run(self):
+-        if self.install_layout == "deb":
+-            db = DebianInstaller(self)
+-        else:
+-            db = None
+ 
+-        if not(db) and not(self.nodeps):
++        if not(self.nodeps):
+             try:
+                 self.check_xslt_dependencies()
+                 self.check_util_dependencies()
+@@ -379,7 +374,6 @@
+                 print >>sys.stderr, "Error: %s" % e
+                 sys.exit(1)
+ 
+-        if db: db.adapt_paths()
+ 
+         # If no build is required, at least build the script
+         if self.skip_build:
+@@ -387,7 +381,6 @@
+ 
+         install.run(self)
+ 
+-        if db: db.finalize()
+ 
+ 
+ class InstallData(install_data):
