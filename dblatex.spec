@@ -1,18 +1,18 @@
 Summary:	Convert DocBook to LaTeX, DVI, PostScript, and PDF
 Summary(pl.UTF-8):	Przekształcanie DocBooka do LaTeXa, DVI, PostScriptu i PDF
 Name:		dblatex
-Version:	0.3.4
-Release:	3
+Version:	0.3.8
+Release:	1
 License:	GPL v2+
 Group:		Applications/Publishing
 Source0:	http://downloads.sourceforge.net/dblatex/%{name}-%{version}.tar.bz2
-# Source0-md5:	a511a2eaa55757b341e4c46353c5c681
+# Source0-md5:	7bd20e712f697e3626d2760fb36451ba
 Patch0:		%{name}-nodebian.patch
 URL:		http://dblatex.sourceforge.net/
-BuildRequires:	python
+BuildRequires:	python >= 2
 BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.717
 BuildRequires:	texlive-latex-ams
 BuildRequires:	texlive-latex-appendix
 BuildRequires:	texlive-latex-effects
@@ -20,7 +20,7 @@ BuildRequires:	texlive-latex-extend
 BuildRequires:	texlive-latex-wasysym
 BuildRequires:	texlive-makeindex
 BuildRequires:	transfig
-Requires:	python-modules
+Requires:	python-modules >= 2
 Requires:	texlive-fonts-rsfs
 Requires:	texlive-latex-ams
 Requires:	texlive-latex-appendix
@@ -50,14 +50,18 @@ najpierw do czystego LaTeXa. Obsługiwane są także znaczniki MathML
 %{__sed} -i -e '1s,^#!.*python,#!%{__python},' scripts/%{name}
 
 %build
-%py_build
+#%%py_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%py_install
+#%%py_install
 
-%py_ocomp $RPM_BUILD_ROOT%{py_sitescriptdir}
-%py_comp $RPM_BUILD_ROOT%{py_sitescriptdir}
+# dblatex script hackery in setup.py doesn't work with split build/install stages
+# nor "build --build-base ... install" args
+%{__python} setup.py install \
+	%{py_install_opts} \
+	--root=$RPM_BUILD_ROOT
+
 %py_postclean
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc
@@ -78,6 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/dbtexmf/dblatex/*.py[co]
 %dir %{py_sitescriptdir}/dbtexmf/dblatex/grubber
 %{py_sitescriptdir}/dbtexmf/dblatex/grubber/*.py[co]
+%{py_sitescriptdir}/dbtexmf/dblatex/grubber/xindylang.xml
 %dir %{py_sitescriptdir}/dbtexmf/dblatex/xetex
 %{py_sitescriptdir}/dbtexmf/dblatex/xetex/*.py[co]
 %dir %{py_sitescriptdir}/dbtexmf/xslt
