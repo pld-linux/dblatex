@@ -2,7 +2,7 @@ Summary:	Convert DocBook to LaTeX, DVI, PostScript, and PDF
 Summary(pl.UTF-8):	Przekształcanie DocBooka do LaTeXa, DVI, PostScriptu i PDF
 Name:		dblatex
 Version:	0.3.8
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Applications/Publishing
 Source0:	http://downloads.sourceforge.net/dblatex/%{name}-%{version}.tar.bz2
@@ -47,9 +47,6 @@ najpierw do czystego LaTeXa. Obsługiwane są także znaczniki MathML
 %setup -q
 %patch0 -p1
 
-# fix #!/usr/bin/env python -> #!/usr/bin/python:
-%{__sed} -i -e '1s,^#!.*python,#!%{__python},' scripts/%{name}
-
 %build
 #%%py_build
 
@@ -64,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 	--root=$RPM_BUILD_ROOT
 
 %py_postclean
+
+# fix #!/usr/bin/env python -> #!/usr/bin/python:
+%{__sed} -i -e '1s,^#!.*python,#!%{__python},' $RPM_BUILD_ROOT/%{_bindir}/%{name}
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc
 
