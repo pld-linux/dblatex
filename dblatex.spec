@@ -2,7 +2,7 @@ Summary:	Convert DocBook to LaTeX, DVI, PostScript, and PDF
 Summary(pl.UTF-8):	Przekształcanie DocBooka do LaTeXa, DVI, PostScriptu i PDF
 Name:		dblatex
 Version:	0.3.8
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Publishing
 Source0:	http://downloads.sourceforge.net/dblatex/%{name}-%{version}.tar.bz2
@@ -22,6 +22,7 @@ BuildRequires:	texlive-makeindex
 BuildRequires:	transfig
 Requires:	python-modules >= 2
 Requires:	texlive-fonts-rsfs
+Requires:	texlive-format-pdflatex
 Requires:	texlive-latex-ams
 Requires:	texlive-latex-appendix
 Requires:	texlive-latex-effects
